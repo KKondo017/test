@@ -9,8 +9,11 @@
 * [ジャンパーワイヤ(オス-メス)](http://akizukidenshi.com/catalog/g/gC-08933/)
 
 # 配線
-## Arduino⇔ADコンバータモジュール
-
+### Arduino⇔ADコンバータモジュール
+|  TH  |  TH  |
+|  TD  |  TD  |
+| ---- | ---- |
+|  TD  |  TD  |
 20200428.csv：出力ファイル
 DBwrite.py:HX711
 HX711.ino
