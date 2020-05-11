@@ -1,4 +1,4 @@
-#weight_comb
+# weight_comb
 
 20200428.csv：出力ファイル
 DBwrite.py:HX711
