@@ -10,10 +10,12 @@
 
 # 配線
 ### Arduino⇔ADコンバータモジュール
-|  TH  |  TH  |
-|  TD  |  TD  |
+| Arduino | ADコンバータ |
 | ---- | ---- |
-|  TD  |  TD  |
+|  5V  |  VDD  |
+|  GND  |  GND  |
+|  10  |  DAT  |
+|  11  |  CLK  |
 20200428.csv：出力ファイル
 DBwrite.py:HX711
 HX711.ino
