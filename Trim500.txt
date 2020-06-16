@@ -1,0 +1,41 @@
+// 任意サイズの画像を500×500pixに分割するマクロ
+macro "Trim500" {
+
+	dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/for21/01.bi21_CC/";		// 画像を格納しているディレクトリ名指定
+	savedir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/for21/02.bi21split_CC/";	// 編集後の画像格納ディレクトリ指定 
+	list = getFileList(dir);							// dir内の画像データをのリスト取得
+	
+	for (i = 0; i < list.length; i++) {
+		name = split(list[i], ".");     // ファイル名取得のために拡張子と分離　＊元ファイルと保存ファイルが同形式の場合は不要
+		filename = name[0];             // 分離したファイル名のほうを取得
+
+		open(dir + list[i]);
+		getDimensions(width, height,channels, slices, frames);	// 画像pix値取得
+		xpix = width;				// 横幅pix値取得
+		ypix = height;				// 高さpix値取得
+		close();
+
+		rx1 = xpix % 500;		        // 横幅を500pixで割った時の余り
+		ry1 = ypix % 500;		        // 高さを500pixで割った時の余り
+		nx = (width - rx1) / 500; 	// x軸の分割数
+		ny = (height - ry1) / 500;	// y軸の分割数
+
+		rx2 = (width - 500) % nx;
+		ry2 = (height - 500) % ny;
+		px = (width - 500 - rx2) /nx;   // 分割数nxで均等分割するときの間隔px
+		py = (height - 500 - ry2) /ny;  // 分割数nyで均等分割するときの間隔py
+
+		for (j = 0; j < ny + 1; j++) {
+			for (k = 0; k < nx + 1; k++) {
+
+				open(dir + list[i]);      // ファイル開く
+				makeRectangle(px * k, py * j , 500, 500);     // 切取用の長方形を描画 makeRectangle(xmin, ymin, width, height)
+				run("Crop");      // 切取実行
+        
+        // 分割したxマス、yマスを入れたファイル名で保存
+				saveAs("png", savedir + filename + "_x" + k + "y" + j);
+				close();
+			}
+		}
+	}
+}
