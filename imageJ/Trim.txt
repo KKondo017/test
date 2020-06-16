@@ -1,0 +1,20 @@
+macro "Trimming" {
+
+dir = getDirectory("Choose a Directory");
+list = getFileList(dir);
+
+for (i=0; i < list.length; i++) {
+
+	open(list[i]);
+
+	makeRectangle(590,90,2600,2200);
+
+	run("Crop");
+
+	saveAs("jpg", dir + "T" + list[i]);
+
+	close();
+
+	}
+
+}

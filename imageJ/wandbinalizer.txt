@@ -1,0 +1,29 @@
+// This macro imports a series of text images as a stack.
+
+  dir = getDirectory("Choose directory");
+  list = getFileList(dir);
+
+  for (i=0; i<list.length; i++) {
+     	file = dir + list[i];
+    	run("Text Image... ", "open=[" + file + "]");
+	fname = split(list[i], ".");
+	sname = fname[0];
+
+	width = getWidth();	// ‰æ‘œ‚Ì•Žæ“¾
+	height = getHeight();	// ‰æ‘œ‚Ì‚‚³Žæ“¾
+
+	for (y = 100; y < height; y = y + 200) {
+		for (x = 0; x < width; x++) {
+			intensity = getPixel(x, y);
+			if(intensity == 1) {
+				doWand(x, y);	// —ÖŠs‚ð‘I‘ð
+				fill();		// ‘I‘ð”ÍˆÍ‚ð“h‚è‚Â‚Ô‚µ
+			}
+		}
+	}
+	saveAs("jpeg", dir + sname + ".jpg");
+	close();
+	
+  }
+  
+

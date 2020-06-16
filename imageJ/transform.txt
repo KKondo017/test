@@ -1,0 +1,72 @@
+macro "transform" {
+	path = "C:/Users/K.Kondo/Desktop/codes/MLtags/entire_plots.csv";		// 小松菜の存在領域座標を保管したCSVのパス指定
+	pathx = "C:/Users/K.Kondo/Desktop/codes/MLtags/entire_xplot.csv";		// x座標all
+	pathy = "C:/Users/K.Kondo/Desktop/codes/MLtags/entire_yplot.csv";		// y座標all
+	pathf = "C:/Users/K.Kondo/Desktop/codes/MLtags/entire_filename.csv";		// ファイル名all
+	dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/";					// 画像を格納しているディレクトリ名指定
+	savedir = "C:/Users/K.Kondo/Desktop/codes/MLtags/";				// 編集後の画像格納ディレクトリ指定 
+	//list = getFileList(dir);							// dir内の画像データをのリスト取得
+
+	str = File.openAsString(path);		// strに座標値等を文字列で格納
+	strx = File.openAsString(pathx);		// strに座標値等を文字列で格納
+	stry = File.openAsString(pathy);		// strに座標値等を文字列で格納
+	strf = File.openAsString(pathf);		// strに座標値等を文字列で格納
+
+	lines = split(str, "\n");			// strを改行で分割し、linesに格納
+	linesx = split(strx, "\n");			// strを改行で分割し、linesに格納
+	linesy = split(stry, "\n");			// strを改行で分割し、linesに格納
+	linesf = split(strf, "\n");			// strを改行で分割し、linesに格納
+
+	// ファイル名、座標情報の変数定義
+	// ファイル名、xmin, ymin, width, height の順に格納
+	filename = newArray(lines.length);		
+	xmin = newArray(lines.length);
+	ymin = newArray(lines.length);
+	xplot = newArray(linesx.length*500);
+	yplot = newArray(linesy.length*500);
+
+	for (i = 0; i < lines.length; i++){
+	
+		// linesの中身をコンマごとに分割してcooに格納
+		coo = split(lines[i], ",");
+		
+		// 各配列に画像ごとの座標値等を引き渡し
+		filename[i] = coo[0];
+		xmin[i] =coo[1];
+		ymin[i] =coo[2];
+	
+	}
+
+	coox = split(linesx[0], ",");
+	cooy = split(linesy[0], ",");
+	
+	for (k = 0; k < coox.length; k++) {
+		xplot[k] = coox[k];// - (xmin[0] - 10);
+		yplot[k] = cooy[k];// - (ymin[0] - 10);
+		print(xplot[k]);
+	}
+	
+	i = 0;
+	m = k;
+	for (j = 1; j < linesx.length; j++) {
+
+		// linesの中身をコンマごとに分割してcooに格納
+		coox = split(linesx[j], ",");
+		cooy = split(linesy[j], ",");
+
+		if (linesf[j] != linesf[j-1]) {
+			i++;
+		}
+
+		for (k = 0; k < coox.length; k++) {
+			xplot[m] = coox[k] - (xmin[i] - 10);
+			yplot[m] = cooy[k] - (ymin[i] - 10);
+			print(xplot[m]);
+			m++;
+		}
+		
+	}
+
+
+
+}

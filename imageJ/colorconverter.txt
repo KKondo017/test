@@ -1,0 +1,38 @@
+// This macro converts grayscale values at each pixel.
+
+  dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/for21/01.bi21/";		// 画像を格納しているディレクトリ名指定
+  savedir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/for21/01.bi21_CC/";	// 編集後の画像格納ディレクトリ指定 
+  list = getFileList(dir);
+
+  for (i=0; i<list.length; i++) {
+     	file = dir + list[i];
+    	open(file);
+	fname = split(list[i], ".");
+	sname = fname[0];
+
+	width = getWidth();	// 画像の幅取得
+	height = getHeight();	// 画像の高さ取得
+	
+	run("Multiply...", "value=2");
+	run("Add...", "value=25");
+
+	changeValues(24, 26, 0);
+	changeValues(26, 28, 2);
+	changeValues(28, 30, 3);
+	changeValues(30, 32, 5);
+	changeValues(32, 34, 6);
+	changeValues(34, 36, 7);
+	changeValues(36, 38, 4);
+	changeValues(54, 56, 8);
+	changeValues(56, 58, 9);
+	changeValues(58, 60, 10);
+	changeValues(66, 68, 1);
+
+
+
+	saveAs("png", savedir + sname + ".png");
+	close();
+	
+  }
+  
+

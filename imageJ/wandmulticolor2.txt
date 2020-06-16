@@ -1,0 +1,43 @@
+// 小松菜データにdamage(輪郭)を描きdamage種ごとの輝度値で塗りつぶす
+
+  pathdi = "C:/Users/K.Kondo/Desktop/codes/MLtags/inputs/damage_info_for21.csv";	// damage座標・タグ格納のcsvファイルパス
+  dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/07.bi_damage_png/";		// 二値化小松菜のjpg格納のディレクトリパス
+  dirsave = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/new_bi/";	// 保存先ディレクトリパス
+
+  str = File.openAsString(pathdi);	// strにdamage_info.csv内容を文字列で格納
+  lines = split(str, "\n");		// strを改行で分割し、linesに格納　画像切替指示、wand用x座標、wand用y座標、タグ
+
+  list = getFileList(dir);	// jpgファイルをリスト化
+
+  filename = newArray(list.length);
+
+  for (i=0; i<list.length; i++) {
+	name = split(list[i], ".");		// "."で分割しファイル名を抽出　listcでも可
+	filename[i] = name[0];
+  }
+  
+  j = 0;
+  judge = true;
+  for (i=0; i<lines.length; i++) {
+	di = split(lines[i], ",");
+	
+	if (judge == true) {
+		open(dir + filename[j] + ".png");
+	}
+
+	doWand(parseInt(di[1]), parseInt(di[2]));
+	setColor(parseInt(di[3]));
+	fill();
+		
+	if (di[0] ==1) {
+		j++;
+		judge = true;
+	} else {
+		judge = false;
+	}
+	
+	if (judge == true) {
+		saveAs("png", dirsave + filename[j - 1] + ".png");
+		close("*");
+	}
+  }

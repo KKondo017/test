@@ -1,0 +1,24 @@
+// This macro imports a series of text images as a stack.
+
+  dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/04.bi_split/";					// 画像を格納しているディレクトリ名指定
+  savedir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/05.bi_split_txt/";				// 編集後の画像格納ディレクトリ指定   list = getFileList(dir);
+  list = getFileList(dir);							// dir内の画像データをのリスト取得
+
+
+  for (i=0; i<list.length; i++) {
+     	file = dir + list[i];
+    	open(file);
+	fname = split(list[i], ".");
+	sname = fname[0];
+
+	// jpgだと0,255の間の値が混ざっているため完全二値化処理
+	setAutoThreshold("Default dark");
+	setThreshold(190, 255);		// 二値化上下限設定
+	run("Convert to Mask");		// 二値化実行
+
+	saveAs("Text Image", savedir + sname + ".txt");
+	close();
+	
+  }
+  
+

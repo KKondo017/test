@@ -1,0 +1,27 @@
+macro "Trimming2" {
+	
+	dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/new_bi/";		// 画像を格納しているディレクトリ名指定
+	list = getFileList(dir);							// dir内の画像データをのリスト取得
+
+	for (i=0; i < list.length; i++) {
+
+		open(dir + list[i]);
+		width = getWidth();
+		height = getHeight();
+		rx = width % 10;
+		ry = height % 3;
+		dx = (width - rx) /10;
+		y  = ((height -ry) * 2) / 3;
+				
+		for (j = 0; j < 9; j++) {
+			intensity = getPixel(dx * j, y);
+			if(intensity == 255) {
+				setColor(21);
+				floodFill(dx * j, y);	// 輪郭を選択
+			}
+		}
+		saveAs("png", dir + list[i]);
+		close();
+	}
+
+}

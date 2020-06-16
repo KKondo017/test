@@ -1,0 +1,19 @@
+// This macro converts jpg images to png.
+
+  dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/02.split/";					// 画像を格納しているディレクトリ名指定
+  savedir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/02.split_png/";				// 編集後の画像格納ディレクトリ指定   list = getFileList(dir);
+  list = getFileList(dir);							// dir内の画像データをのリスト取得
+
+
+  for (i=0; i<list.length; i++) {
+     	file = dir + list[i];
+    	open(file);
+	fname = split(list[i], ".");
+	sname = fname[0];
+
+	saveAs("png", savedir + sname + ".png");
+	close();
+	
+  }
+  
+

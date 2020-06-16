@@ -1,0 +1,24 @@
+macro "transform" {
+	path = "C:/Users/K.Kondo/Desktop/codes/MLtags/entire_base_fname.csv";		// 画像名を格納したcsvのパス指定
+	savedir = "C:/Users/K.Kondo/Desktop/codes/MLtags/";				// 編集後の画像格納ディレクトリ指定 
+
+	str = File.openAsString(path);		// strに座標値等を文字列で格納
+	
+	lines = split(str, "\n");			// strを改行で分割し、linesに格納
+	
+	// ファイル名、座標情報の変数定義
+	// ファイル名、xmin, ymin, width, height の順に格納
+	//filename = newArray(lines.length);		
+	
+	for (i = 0; i < lines.length; i++){
+	
+		// linesの中身をコンマごとに分割してcooに格納
+		fname =lines[i] +  ".jpg";
+		print(fname);		
+
+		
+	}
+
+
+
+}
