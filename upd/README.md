@@ -1,10 +1,5 @@
 ## **【内容】**  
-| Arduino | ADコンバータ |
-| ---- | ---- |
-|  5V  |  VDD  |
-|  GND  |  GND  |
-|  10  |  DAT  |
-|  11  |  CLK  |
+| ファイル名 | 内容 |
 | ---- | ---- |
 |BGwhitening.txt|		背景を指定輝度値に塗りつぶすマクロ  |
 colorconverter.txt	:画像中の輝度値を任意に変更するマクロ  
