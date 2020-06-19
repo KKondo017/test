@@ -1,0 +1,40 @@
+// 画像中の輝度値を任意に変更するマクロ
+
+  dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/for21/01.bi21/";		// 画像を格納しているディレクトリ名指定
+  savedir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/for21/01.bi21_CC/";	// 編集後の画像格納ディレクトリ指定 
+  list = getFileList(dir);	// 格納画像リストを取得 (ファイル名+拡張子の配列)
+
+  for (i=0; i<list.length; i++) {
+     	file = dir + list[i];		// パス定義
+    	open(file);			// 画像オープン
+	fname = split(list[i], ".");    // ファイル名取得のために拡張子と分離　＊元ファイルと保存ファイルが同形式の場合は不要
+	sname = fname[0];            	// 分離したファイル名のほうを取得
+
+	width = getWidth();	// 画像の幅取得
+	height = getHeight();	// 画像の高さ取得
+	
+	// 輝度値の変更
+	// changeValues(min, max, value) min～maxまでの輝度値をvalueに変換する
+	// たぶん整数型なのでそれぞれが2以上差が出るように前処理する
+	run("Multiply...", "value=2");		// 画像全体の輝度値を2倍
+	run("Add...", "value=25");		// 画像全体の輝度値に25足す
+
+	changeValues(24, 26, 0);	// 背景=0
+	changeValues(26, 28, 2);	// 虫食い=2
+	changeValues(28, 30, 3);	// 病気=3
+	changeValues(30, 32, 5);	// ゴミ=5
+	changeValues(32, 34, 6);	// 泥=6
+	changeValues(34, 36, 7);	// 潰れ=7
+	changeValues(36, 38, 4);	// 隙間=4
+	changeValues(54, 56, 8);	// 破れ=8
+	changeValues(56, 58, 9);	// 水滴=9
+	changeValues(58, 60, 10);	// 水滴群=10
+	changeValues(66, 68, 1);	// 小松菜=1
+
+	// 保存
+	saveAs("png", savedir + sname + ".png");	// pngで保存
+	close();			// 画像を閉じる
+	
+  }
+  
+

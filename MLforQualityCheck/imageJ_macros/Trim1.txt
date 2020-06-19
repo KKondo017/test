@@ -1,0 +1,47 @@
+// csvに格納された座標情報から切取を実行するマクロ
+macro "Trimming2" {
+
+	path = "C:/Users/K.Kondo/Downloads/tag_entire_plots.csv";	// 小松菜の存在領域座標を保管したCSVのパス指定
+	dir = "C:/Users/K.Kondo/Desktop/images/";			// 画像を格納しているディレクトリ名指定
+	savedir = "C:/Users/K.Kondo/Desktop/jpg/";			// 編集後の画像格納ディレクトリ指定 
+	list = getFileList(dir);					// dir内の画像データをのリスト取得
+
+	str = File.openAsString(path);		// strに座標値等を文字列で格納
+	
+	lines = split(str, "\n");		// strを改行で分割し、linesに格納
+
+	// ファイル名、座標情報の変数定義
+	// ファイル名、xmin, ymin, width, height の順に格納
+	filename = newArray(lines.length);		
+	xmin = newArray(lines.length);
+	ymin = newArray(lines.length);
+	dx = newArray(lines.length);
+	dy = newArray(lines.length);
+	
+
+	for (i = 0; i < lines.length; i++){
+	
+		// linesの中身をコンマごとに分割してcooに格納
+		coo = split(lines[i], ",");
+		
+		// 各配列に画像ごとの座標値等を引き渡し
+		filename[i] = coo[0];
+		xmin[i] =coo[1];
+		ymin[i] =coo[2];
+		dx[i] =coo[3];
+		dy[i] =coo[4];
+	
+	}
+
+	for (i=0; i < list.length; i++) {
+
+		open(dir + list[i]);		// 画像オープン
+		makeRectangle(xmin[i] - 10, ymin[i] - 10, dx[i] + 20, dy[i] + 20);	// 矩形の描画
+		run("Crop");		// 切取実行
+
+		saveAs("jpg", savedir + filename[i]);		//jpgで保存
+		close();		// 画像閉じる
+
+	}
+
+}

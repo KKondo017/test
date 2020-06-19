@@ -1,0 +1,19 @@
+// jpgをpngに変換するマクロ
+
+  dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/02.split/";		// 画像を格納しているディレクトリ名指定
+  savedir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/02.split_png/";	// 編集後の画像格納ディレクトリ指定   list = getFileList(dir);
+  list = getFileList(dir);							// dir内の画像データをのリスト取得
+
+
+  for (i=0; i<list.length; i++) {
+     	file = dir + list[i];		// パス定義
+    	open(file);			// 画像オープン
+	fname = split(list[i], ".");    // ファイル名取得のために拡張子と分離　＊元ファイルと保存ファイルが同形式の場合は不要
+	sname = fname[0];            	// 分離したファイル名のほうを取得
+
+	saveAs("png", savedir + sname + ".png");	// pngで保存
+	close();			// 画像を閉じる
+	
+  }
+  
+
