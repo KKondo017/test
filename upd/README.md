@@ -1,4 +1,4 @@
-##**【内容】**
+## **【内容】**  
 BGwhitening.txt		:背景を指定輝度値に塗りつぶすマクロ  
 colorconverter.txt	:画像中の輝度値を任意に変更するマクロ
 getfilename.txt		:csvファイルに格納された名前情報の取得
