@@ -1,0 +1,15 @@
+// 指定ディレクトリ内の画像の輝度値等の情報を取得するマクロ
+
+  dir = "C:/Users/K.Kondo/Desktop/codes/MLtags/images/for21/01.bi21/";		// 画像を格納しているディレクトリ名指定
+  list = getFileList(dir);							// dir内の画像データをのリスト取得
+
+
+  for (i=0; i<list.length; i++) {
+     	file = dir + list[i];		// パス定義
+    	open(file);			// 画像オープン
+	run("Measure");		// 計測の実行　計測項目は指定できる
+	close();	// 画像を閉じる
+	
+  }
+  
+
